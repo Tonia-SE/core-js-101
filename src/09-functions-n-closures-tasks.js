@@ -23,8 +23,11 @@
  *   getComposition(Math.sin, Math.asin)(x) => Math.sin(Math.asin(x))
  *
  */
-function getComposition(/* f, g */) {
-  throw new Error('Not implemented');
+function getComposition(f, g) {
+  // throw new Error('Not implemented');
+  return function c(x) {
+    return f(g(x));
+  };
 }
 
 
@@ -44,8 +47,11 @@ function getComposition(/* f, g */) {
  *   power05(16) => 4
  *
  */
-function getPowerFunction(/* exponent */) {
-  throw new Error('Not implemented');
+function getPowerFunction(exponent) {
+  // throw new Error('Not implemented');
+  return function pow(x) {
+    return (x ** exponent);
+  };
 }
 
 
@@ -81,10 +87,18 @@ function getPolynom() {
  *   ...
  *   memoizer() => the same random number  (next run, returns the previous cached result)
  */
-function memoize(/* func */) {
-  throw new Error('Not implemented');
+function memoize(func) {
+  // throw new Error('Not implemented');
+  const memory = new Map();
+  return function foo(arg) {
+    if (memory.has(arg)) {
+      return memory.get(arg);
+    }
+    const result = func(arg);
+    memory.set(arg, result);
+    return result;
+  };
 }
-
 
 /**
  * Returns the function trying to call the passed function and if it throws,
@@ -104,7 +118,32 @@ function memoize(/* func */) {
 function retry(/* func, attempts */) {
   throw new Error('Not implemented');
 }
+// var Promise = require('bluebird');
+// var retry = require('bluebird-retry');
 
+// var count = 0;
+// function myfunc() {
+//     console.log('myfunc called ' + (++count) + ' times');
+//     if (count < 3) {
+//         return Promise.reject(new Error('fail the first two times'));
+//     } else {
+//         return Promise.resolve('succeed the third time');
+//     }
+// }
+// function retry(func, attempts) {
+//   // throw new Error('Not implemented');
+//   var Promise = require('+');
+//   //var retry = require('-');
+
+//   return function func() {
+//       console.log('myfunc called ' + (++attempts) + ' times');
+//       if (attempts % 2 === 0) {
+//           return Promise.reject(new Error('fail the first two times'));
+//       } else {
+//           return Promise.resolve('succeed the third time');
+//       }
+//   }
+// }
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -150,7 +189,21 @@ function logger(/* func, logFunc */) {
 function partialUsingArguments(/* fn, ...args1 */) {
   throw new Error('Not implemented');
 }
-
+// function partialUsingArguments(fn, ...args1) {
+//   // throw new Error('Not implemented');
+//   return function c(...args2) {
+//     return function fn(... args1) {
+//       let arr = [...args1].concat([...args2]);
+//       return arr.reduce((a, b) => (a.concat(b)));
+//     }
+//   }
+// }
+// function getComposition(f, g) {
+//   // throw new Error('Not implemented');
+//   return function c(x) {
+//     return f(g(x));
+//   };
+// }
 
 /**
  * Returns the id generator function that returns next integer starting
@@ -172,7 +225,13 @@ function partialUsingArguments(/* fn, ...args1 */) {
 function getIdGeneratorFunction(/* startFrom */) {
   throw new Error('Not implemented');
 }
-
+// function getIdGeneratorFunction(startFrom) {
+//   // throw new Error('Not implemented');
+//   return (function count() {
+//     let count = startFrom + 1;
+//     return count;
+//   })();
+// }
 
 module.exports = {
   getComposition,

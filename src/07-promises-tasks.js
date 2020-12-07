@@ -30,6 +30,43 @@
  */
 function willYouMarryMe(/* isPositiveAnswer */) {
   throw new Error('Not implemented');
+  // let answer = 'Hooray!!! She said "Yes"!';
+  // if (isPositiveAnswer) {
+  //   answer = 'Oh no, she said "No".';
+  // }
+
+  // const willYouMarryMe = new Promise(
+  //   (resolve(answer), reject) => {
+
+  //   resolve(answer);
+
+  //     else {
+  //       answer = 'Oh no, she said "No".';
+  //         reject(answer);
+  //     }
+  //   }
+  // );
+
+  // return willYouMarryMe;
+
+  // async function askMom() {
+  //     try {
+  //         console.log('before asking Mom');
+
+  //         let phone = await willIGetNewPhone;
+  //         let message = await showOff(phone);
+
+  //         console.log(message);
+  //         console.log('after asking mom');
+  //     }
+  //     catch (error) {
+  //         console.log(error.message);
+  //     }
+  // }
+
+  // (async () => {
+  //     await askMom();
+  // })();
 }
 
 
