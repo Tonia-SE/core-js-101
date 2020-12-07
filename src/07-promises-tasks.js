@@ -28,45 +28,21 @@
  *      .catch((error) => console.log(error.message)) // 'Error: Wrong parameter is passed!
  *                                                    //  Ask her again.';
  */
-function willYouMarryMe(/* isPositiveAnswer */) {
-  throw new Error('Not implemented');
-  // let answer = 'Hooray!!! She said "Yes"!';
-  // if (isPositiveAnswer) {
-  //   answer = 'Oh no, she said "No".';
-  // }
-
-  // const willYouMarryMe = new Promise(
-  //   (resolve(answer), reject) => {
-
-  //   resolve(answer);
-
-  //     else {
-  //       answer = 'Oh no, she said "No".';
-  //         reject(answer);
-  //     }
-  //   }
-  // );
-
-  // return willYouMarryMe;
-
-  // async function askMom() {
-  //     try {
-  //         console.log('before asking Mom');
-
-  //         let phone = await willIGetNewPhone;
-  //         let message = await showOff(phone);
-
-  //         console.log(message);
-  //         console.log('after asking mom');
-  //     }
-  //     catch (error) {
-  //         console.log(error.message);
-  //     }
-  // }
-
-  // (async () => {
-  //     await askMom();
-  // })();
+function willYouMarryMe(isPositiveAnswer) {
+  // throw new Error('Not implemented');
+  return new Promise(
+    (resolve, reject) => {
+      if (typeof isPositiveAnswer === 'boolean') {
+        if (isPositiveAnswer) {
+          resolve('Hooray!!! She said "Yes"!');
+        } else {
+          resolve('Oh no, she said "No".');
+        }
+      } else {
+        reject(new Error('Wrong parameter is passed! Ask her again.'));
+      }
+    },
+  );
 }
 
 
@@ -85,8 +61,16 @@ function willYouMarryMe(/* isPositiveAnswer */) {
  *    })
  *
  */
-function processAllPromises(/* array */) {
-  throw new Error('Not implemented');
+function processAllPromises(array) {
+  // throw new Error('Not implemented');
+  const res = [];
+  Promise.all(array.map((promise) => (promise)))
+    .then((result) => (res.push(result)));
+  return new Promise(
+    (resolve) => {
+      resolve(res);
+    },
+  );
 }
 
 /**
