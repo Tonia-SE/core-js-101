@@ -322,33 +322,55 @@ function reverseInteger(num) {
  */
 function isCreditCardNumber(/* ccn */) {
   throw new Error('Not implemented');
-  // let sum = 0;
-  // if (ccn.length % 2 === 0) {
-  //   for (var i = 0; i < ccn.length; i++) {
-  //     var intVal = parseInt(ccn.substr(i, 1));
-  //     if (i % 2 === 0) {
-  //         intVal *= 2;
-  //         if (intVal > 9) {
-  //             intVal = 1 + (intVal % 10);
+  //   // takes the form field value and returns true on valid number
+
+  // // accept only digits, dashes or spaces
+  //     if (/[^0-9-\s]+/.test(value)) return false;
+
+  // // The Luhn Algorithm. It's so pretty.
+  //     var nCheck = 0, nDigit = 0, bEven = false;
+  //     value = value.replace(/\D/g, "");
+
+  //     for (var n = value.length - 1; n >= 0; n--) {
+  //         var cDigit = value.charAt(n),
+  //             nDigit = parseInt(cDigit, 10);
+
+  //         if (bEven) {
+  //             if ((nDigit *= 2) > 9) nDigit -= 9;
   //         }
+
+  //         nCheck += nDigit;
+  //         bEven = !bEven;
   //     }
-  //     sum += intVal;
-  //   }
-  // }
-  // else {
-  //   for (var i = 0; i < ccn.length; i++) {
-  //     var intVal = parseInt(ccn.substr(i, 1));
-  //     if (i % 2 !== 0) {
-  //         intVal *= 2;
-  //         if (intVal > 9) {
-  //             intVal = 1 + (intVal % 10);
-  //         }
-  //     }
-  //     sum += intVal;
-  //   }
-  // }
-  // return (sum % 10) == 0;
+
+  //     return (nCheck % 10) == 0;
 }
+// let sum = 0;
+// if (ccn.length % 2 === 0) {
+//   for (var i = 0; i < ccn.length; i++) {
+//     var intVal = parseInt(ccn.substr(i, 1));
+//     if (i % 2 === 0) {
+//         intVal *= 2;
+//         if (intVal > 9) {
+//             intVal = 1 + (intVal % 10);
+//         }
+//     }
+//     sum += intVal;
+//   }
+// }
+// else {
+//   for (var i = 0; i < ccn.length; i++) {
+//     var intVal = parseInt(ccn.substr(i, 1));
+//     if (i % 2 !== 0) {
+//         intVal *= 2;
+//         if (intVal > 9) {
+//             intVal = 1 + (intVal % 10);
+//         }
+//     }
+//     sum += intVal;
+//   }
+// }
+// return (sum % 10) == 0;
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
