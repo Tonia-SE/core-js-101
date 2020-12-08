@@ -320,57 +320,30 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
-  //   // takes the form field value and returns true on valid number
-
-  // // accept only digits, dashes or spaces
-  //     if (/[^0-9-\s]+/.test(value)) return false;
-
-  // // The Luhn Algorithm. It's so pretty.
-  //     var nCheck = 0, nDigit = 0, bEven = false;
-  //     value = value.replace(/\D/g, "");
-
-  //     for (var n = value.length - 1; n >= 0; n--) {
-  //         var cDigit = value.charAt(n),
-  //             nDigit = parseInt(cDigit, 10);
-
-  //         if (bEven) {
-  //             if ((nDigit *= 2) > 9) nDigit -= 9;
-  //         }
-
-  //         nCheck += nDigit;
-  //         bEven = !bEven;
-  //     }
-
-  //     return (nCheck % 10) == 0;
+function isCreditCardNumber(ccn) {
+  // throw new Error('Not implemented');
+  if (/[^0-9-\s]+/.test(ccn)) {
+    return false;
+  }
+  let nCheck = 0;
+  let nDigit = 0;
+  let bEven = false;
+  let ccn1 = ccn.toString();
+  ccn1 = ccn1.replace(/\D/g, '');
+  for (let n = ccn1.length - 1; n >= 0; n -= 1) {
+    const cDigit = ccn1.charAt(n);
+    nDigit = parseInt(cDigit, 10);
+    if (bEven) {
+      nDigit *= 2;
+      if (nDigit > 9) {
+        nDigit -= 9;
+      }
+    }
+    nCheck += nDigit;
+    bEven = !bEven;
+  }
+  return (nCheck % 10) === 0;
 }
-// let sum = 0;
-// if (ccn.length % 2 === 0) {
-//   for (var i = 0; i < ccn.length; i++) {
-//     var intVal = parseInt(ccn.substr(i, 1));
-//     if (i % 2 === 0) {
-//         intVal *= 2;
-//         if (intVal > 9) {
-//             intVal = 1 + (intVal % 10);
-//         }
-//     }
-//     sum += intVal;
-//   }
-// }
-// else {
-//   for (var i = 0; i < ccn.length; i++) {
-//     var intVal = parseInt(ccn.substr(i, 1));
-//     if (i % 2 !== 0) {
-//         intVal *= 2;
-//         if (intVal > 9) {
-//             intVal = 1 + (intVal % 10);
-//         }
-//     }
-//     sum += intVal;
-//   }
-// }
-// return (sum % 10) == 0;
 /**
  * Returns the digital root of integer:
  *   step1 : find sum of all digits
@@ -522,7 +495,7 @@ function getMatrixProduct(/* m1, m2 */) {
  * Returns the evaluation of the specified tic-tac-toe position.
  * See the details: https://en.wikipedia.org/wiki/Tic-tac-toe
  *
- * Position is provides as 3x3 array with the following values: 'X','0', undefined
+ * Position is provides as 3x3 array with the following ccns: 'X','0', undefined
  * Function should return who is winner in the current position according to the game rules.
  * The result can be: 'X','0',undefined
  *

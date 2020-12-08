@@ -68,8 +68,16 @@ function getPowerFunction(exponent) {
  *   getPolynom(8)     => y = 8
  *   getPolynom()      => null
  */
-function getPolynom() {
-  throw new Error('Not implemented');
+function getPolynom(...args) {
+  // throw new Error('Not implemented');
+  return function foo(x) {
+    const arr = [...args];
+    if (arr.length === 0) {
+      return null;
+    }
+    const arr1 = arr.map((element, i) => ((x ** (arr.length - 1 - i)) * element));
+    return arr1.reduce((a, b) => (a + b));
+  };
 }
 
 
@@ -115,35 +123,24 @@ function memoize(func) {
  * }, 2);
  * retryer() => 2
  */
-function retry(/* func, attempts */) {
-  throw new Error('Not implemented');
+function retry(func, attempts) {
+  // throw new Error('Not implemented');
+  return function foo() {
+    let res = null;
+    for (let i = 0; i < attempts; i += 1) {
+      let isBreak = true;
+      try {
+        res = func();
+      } catch (e) {
+        isBreak = false;
+      }
+      if (isBreak) {
+        break;
+      }
+    }
+    return res;
+  };
 }
-// var Promise = require('bluebird');
-// var retry = require('bluebird-retry');
-
-// var count = 0;
-// function myfunc() {
-//     console.log('myfunc called ' + (++count) + ' times');
-//     if (count < 3) {
-//         return Promise.reject(new Error('fail the first two times'));
-//     } else {
-//         return Promise.resolve('succeed the third time');
-//     }
-// }
-// function retry(func, attempts) {
-//   // throw new Error('Not implemented');
-//   var Promise = require('+');
-//   //var retry = require('-');
-
-//   return function func() {
-//       console.log('myfunc called ' + (++attempts) + ' times');
-//       if (attempts % 2 === 0) {
-//           return Promise.reject(new Error('fail the first two times'));
-//       } else {
-//           return Promise.resolve('succeed the third time');
-//       }
-//   }
-// }
 
 /**
  * Returns the logging wrapper for the specified method,
@@ -168,10 +165,17 @@ function retry(/* func, attempts */) {
  * cos(3.141592653589793) ends
  *
  */
-function logger(/* func, logFunc */) {
-  throw new Error('Not implemented');
+function logger(func, logFunc) {
+  // throw new Error('Not implemented');
+  return function wrapper(...args) {
+    let str = JSON.stringify(args);
+    str = str.slice(1, str.length - 1);
+    logFunc(`${func.name}(${str}) starts`);
+    const result = func.apply(this, args);
+    logFunc(`${func.name}(${str}) ends`);
+    return result;
+  };
 }
-
 
 /**
  * Return the function with partial applied arguments
@@ -186,24 +190,12 @@ function logger(/* func, logFunc */) {
  *   partialUsingArguments(fn, 'a','b','c')('d') => 'abcd'
  *   partialUsingArguments(fn, 'a','b','c','d')() => 'abcd'
  */
-function partialUsingArguments(/* fn, ...args1 */) {
-  throw new Error('Not implemented');
+function partialUsingArguments(fn, ...args1) {
+  // throw new Error('Not implemented');
+  return function foo(...args) {
+    return args1.concat(args).join('');
+  };
 }
-// function partialUsingArguments(fn, ...args1) {
-//   // throw new Error('Not implemented');
-//   return function c(...args2) {
-//     return function fn(... args1) {
-//       let arr = [...args1].concat([...args2]);
-//       return arr.reduce((a, b) => (a.concat(b)));
-//     }
-//   }
-// }
-// function getComposition(f, g) {
-//   // throw new Error('Not implemented');
-//   return function c(x) {
-//     return f(g(x));
-//   };
-// }
 
 /**
  * Returns the id generator function that returns next integer starting
@@ -222,16 +214,14 @@ function partialUsingArguments(/* fn, ...args1 */) {
  *   getId4() => 7
  *   getId10() => 11
  */
-function getIdGeneratorFunction(/* startFrom */) {
-  throw new Error('Not implemented');
+function getIdGeneratorFunction(startFrom) {
+  // throw new Error('Not implemented');
+  let count = startFrom - 1;
+  return function generateSequence() {
+    count += 1;
+    return count;
+  };
 }
-// function getIdGeneratorFunction(startFrom) {
-//   // throw new Error('Not implemented');
-//   return (function count() {
-//     let count = startFrom + 1;
-//     return count;
-//   })();
-// }
 
 module.exports = {
   getComposition,

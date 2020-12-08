@@ -69,6 +69,7 @@ describe('05-regex-tasks', () => {
       'Pa__W0rd',
       '   PassW0rd    ',
     ].forEach((str) => {
+      console.log(str)
       assert(
         !result.test(str),
         `Regex matches '${str}'`,
